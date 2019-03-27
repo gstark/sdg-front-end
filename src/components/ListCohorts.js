@@ -10,7 +10,7 @@ class ListCohorts extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/cohorts.json').then(response => {
+    axios.get('http://localhost:3000/api/cohorts').then(response => {
       this.setState({ cohorts: response.data })
     })
   }
@@ -18,7 +18,7 @@ class ListCohorts extends Component {
   onSearchChange = event => {
     this.setState({ search: event.target.value }, () => {
       axios
-        .get(`http://localhost:3000/cohorts.json?search=${this.state.search}`)
+        .get(`http://localhost:3000/api/cohorts?search=${this.state.search}`)
         .then(response => {
           this.setState({ cohorts: response.data })
         })

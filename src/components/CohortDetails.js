@@ -12,7 +12,7 @@ class CohortDetails extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:3000/cohorts/${this.props.match.params.id}.json`)
+      .get(`http://localhost:3000/api/cohorts/${this.props.match.params.id}`)
       .then(response => {
         this.setState({ cohort: response.data })
       })
@@ -21,7 +21,7 @@ class CohortDetails extends Component {
   deleteCohort = event => {
     console.log('Deleting cohort', this.state.cohort.id)
     axios
-      .delete(`http://localhost:3000/cohorts/${this.state.cohort.id}`)
+      .delete(`http://localhost:3000/api/cohorts/${this.state.cohort.id}`)
       .then(response => {
         // Because we are a routed component
         // we have this.props.history
@@ -56,7 +56,7 @@ class CohortDetails extends Component {
   addStudent = form => {
     axios
       .post(
-        `http://localhost:3000/cohorts/${this.state.cohort.id}/students.json`,
+        `http://localhost:3000/api/cohorts/${this.state.cohort.id}/students`,
         {
           student: form.formData
         }
@@ -65,7 +65,7 @@ class CohortDetails extends Component {
         // Reload the cohort!
         axios
           .get(
-            `http://localhost:3000/cohorts/${this.props.match.params.id}.json`
+            `http://localhost:3000/api/cohorts/${this.props.match.params.id}`
           )
           .then(response => {
             this.setState({ cohort: response.data })

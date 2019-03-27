@@ -15,7 +15,7 @@ class EditCohort extends Component {
     // Front end URL /cohorts/edit/2 will edit cohort 2
     //
     axios
-      .get(`http://localhost:3000/cohorts/${this.props.match.params.id}.json`)
+      .get(`http://localhost:3000/api/cohorts/${this.props.match.params.id}`)
       .then(response => {
         this.setState({ cohort: response.data })
       })
@@ -28,7 +28,7 @@ class EditCohort extends Component {
     // Use axios to *CREATE* a cohort
 
     axios
-      .put(`http://localhost:3000/cohorts/${this.props.match.params.id}.json`, {
+      .put(`http://localhost:3000/api/cohorts/${this.props.match.params.id}`, {
         cohort: form.formData
       })
       .then(response => {

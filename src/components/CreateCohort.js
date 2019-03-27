@@ -10,7 +10,7 @@ class CreateCohort extends Component {
     // Use axios to *CREATE* a cohort
 
     axios
-      .post('http://localhost:3000/cohorts', {
+      .post('http://localhost:3000/api/cohorts', {
         cohort: form.formData
       })
       .then(response => {
