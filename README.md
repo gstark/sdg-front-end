@@ -22,9 +22,9 @@
 
 # - x Delete a student
 
-# - Show Student Details
+# - x Show Student Details
 
-# - Update a student
+# - x Update a student
 
 # - Fancy: Add a navbar for navigation and move create + search to the navigation bar
 

@@ -7,7 +7,7 @@ const Student = props => {
   const deleteStudent = event => {
     axios
       .delete(
-        `http://localhost:3000/api/cohorts/${props.cohortID}/students/${
+        `http://localhost:3000/api/cohorts/${props.cohort.id}/students/${
           props.student.id
         }`
       )
@@ -19,7 +19,9 @@ const Student = props => {
 
   return (
     <li key={props.student.id} className="list-group-item">
-      {props.student.name}
+      <Link to={`/cohorts/${props.cohort.id}/students/${props.student.id}`}>
+        {props.student.name}
+      </Link>
       <button className="btn btn-danger float-right" onClick={deleteStudent}>
         x
       </button>
@@ -75,7 +77,7 @@ class CohortDetails extends Component {
         {this.state.cohort.students.map(student => (
           <Student
             key={student.id}
-            cohortID={this.state.cohort.id}
+            cohort={this.state.cohort}
             student={student}
             loadCohort={this.loadCohort}
           />
