@@ -16,11 +16,13 @@ class ListCohorts extends Component {
 
   render() {
     return (
-      <ul>
-        {this.state.cohorts.map(cohort => (
-          <CohortListItem key={cohort.id} cohort={cohort} />
-        ))}
-      </ul>
+      <>
+        <ul className="list-group">
+          {this.state.cohorts.map(cohort => (
+            <CohortListItem key={cohort.id} cohort={cohort} />
+          ))}
+        </ul>
+      </>
     )
   }
 }

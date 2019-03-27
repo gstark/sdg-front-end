@@ -18,10 +18,13 @@ class CohortDetails extends Component {
 
   render() {
     return (
-      <ul>
-        <li>{this.state.cohort.name}</li>
-        <li>{this.state.cohort.start_date}</li>
-        <li>{this.state.cohort.end_date}</li>
+      <ul className="list-group">
+        <li className="list-group-item active">{this.state.cohort.name}</li>
+        <li className="list-group-item">
+          Start: {this.state.cohort.start_date}
+        </li>
+        <li className="list-group-item">End: {this.state.cohort.end_date}</li>
+        <li className="list-group-item">Number of students: 14</li>
       </ul>
     )
   }

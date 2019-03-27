@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class CohortListItem extends Component {
   render() {
-    return <li>{this.props.cohort.name}</li>
+    return <li className="list-group-item">{this.props.cohort.name}</li>
   }
 }
 
