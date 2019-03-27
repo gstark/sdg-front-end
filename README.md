@@ -18,7 +18,7 @@
 
 # - x Search Cohorts
 
-# - Create Students
+# - x Create Students
 
 # - Show Student Details
 

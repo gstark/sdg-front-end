@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Form from 'react-jsonschema-form'
 
 class CohortDetails extends Component {
   state = {
@@ -13,7 +14,6 @@ class CohortDetails extends Component {
     axios
       .get(`http://localhost:3000/cohorts/${this.props.match.params.id}.json`)
       .then(response => {
-        console.log(response.data)
         this.setState({ cohort: response.data })
       })
   }
@@ -38,7 +38,12 @@ class CohortDetails extends Component {
 
     return (
       <ul className="list-group mb-3">
-        <li className="list-group-item active">Students:</li>
+        <li className="list-group-item active d-flex justify-content-between align-items-center ">
+          Students:
+          <span className="badge badge-warning badge-pill">
+            {this.state.cohort.student_count} Students
+          </span>
+        </li>
         {this.state.cohort.students.map(student => (
           <li key={student.id} className="list-group-item">
             {student.name}
@@ -48,22 +53,54 @@ class CohortDetails extends Component {
     )
   }
 
+  addStudent = form => {
+    axios
+      .post(
+        `http://localhost:3000/cohorts/${this.state.cohort.id}/students.json`,
+        {
+          student: form.formData
+        }
+      )
+      .then(response => {
+        // Reload the cohort!
+        axios
+          .get(
+            `http://localhost:3000/cohorts/${this.props.match.params.id}.json`
+          )
+          .then(response => {
+            this.setState({ cohort: response.data })
+          })
+      })
+  }
+
+  addStudentForm = () => {
+    const formSchema = {
+      title: 'Add Student',
+      type: 'object',
+      required: ['name'],
+      properties: {
+        name: { type: 'string', title: 'Name', default: '' },
+        address: { type: 'string', title: 'Address', default: '' },
+        age: { type: 'integer', title: 'Age' },
+        email: { type: 'string', title: 'E-mail' }
+      }
+    }
+
+    return <Form schema={formSchema} onSubmit={this.addStudent} />
+  }
+
   render() {
     return (
       <>
         <ul className="list-group mb-3">
-          <li className="list-group-item d-flex justify-content-between align-items-center active">
-            {this.state.cohort.name}
-            <span className="badge badge-warning badge-pill">
-              {this.state.cohort.student_count} Students
-            </span>
-          </li>
+          <li className="list-group-item active">{this.state.cohort.name}</li>
           <li className="list-group-item">
             Start: {this.state.cohort.start_date}
           </li>
           <li className="list-group-item">End: {this.state.cohort.end_date}</li>
         </ul>
         {this.renderStudents()}
+        {this.addStudentForm()}
         <div className="mb-3">
           <Link
             to={`/cohorts/edit/${this.state.cohort.id}`}
