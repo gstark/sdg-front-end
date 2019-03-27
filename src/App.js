@@ -7,8 +7,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div class="jumbotron">
-          <h1 class="display-4">Suncoast Developers Guild</h1>
+        <div className="jumbotron">
+          <h1 className="display-4">Suncoast Developers Guild</h1>
         </div>
         <ListCohorts />
       </div>
