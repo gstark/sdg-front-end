@@ -20,11 +20,11 @@
 
 # - x Create Students
 
+# - x Delete a student
+
 # - Show Student Details
 
 # - Update a student
-
-# - Delete a student
 
 # - Fancy: Add a navbar for navigation and move create + search to the navigation bar
 

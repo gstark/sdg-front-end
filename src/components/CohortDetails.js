@@ -3,6 +3,30 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Form from 'react-jsonschema-form'
 
+const Student = props => {
+  const deleteStudent = event => {
+    axios
+      .delete(
+        `http://localhost:3000/api/cohorts/${props.cohortID}/students/${
+          props.student.id
+        }`
+      )
+      .then(response => {
+        // When the student is deleted call the loadCohort we were given
+        props.loadCohort()
+      })
+  }
+
+  return (
+    <li key={props.student.id} className="list-group-item">
+      {props.student.name}
+      <button className="btn btn-danger float-right" onClick={deleteStudent}>
+        x
+      </button>
+    </li>
+  )
+}
+
 class CohortDetails extends Component {
   state = {
     cohort: {
@@ -10,12 +34,16 @@ class CohortDetails extends Component {
     }
   }
 
-  componentDidMount() {
+  loadCohort = () => {
     axios
       .get(`http://localhost:3000/api/cohorts/${this.props.match.params.id}`)
       .then(response => {
         this.setState({ cohort: response.data })
       })
+  }
+
+  componentDidMount() {
+    this.loadCohort()
   }
 
   deleteCohort = event => {
@@ -45,9 +73,12 @@ class CohortDetails extends Component {
           </span>
         </li>
         {this.state.cohort.students.map(student => (
-          <li key={student.id} className="list-group-item">
-            {student.name}
-          </li>
+          <Student
+            key={student.id}
+            cohortID={this.state.cohort.id}
+            student={student}
+            loadCohort={this.loadCohort}
+          />
         ))}
       </ul>
     )
@@ -63,13 +94,7 @@ class CohortDetails extends Component {
       )
       .then(response => {
         // Reload the cohort!
-        axios
-          .get(
-            `http://localhost:3000/api/cohorts/${this.props.match.params.id}`
-          )
-          .then(response => {
-            this.setState({ cohort: response.data })
-          })
+        this.loadCohort()
       })
   }
 
