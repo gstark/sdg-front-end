@@ -8,7 +8,7 @@ class CohortDetails extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:3000/cohorts/${this.props.id}`)
+      .get(`http://localhost:3000/cohorts/${this.props.match.params.id}`)
       .then(response => {
         console.log(response.data)
         this.setState({ cohort: response.data })
@@ -21,7 +21,11 @@ class CohortDetails extends Component {
     axios
       .delete(`http://localhost:3000/cohorts/${this.state.cohort.id}`)
       .then(response => {
-        // Redirect back to the cohort list page
+        // Because we are a routed component
+        // we have this.props.history
+        //
+        // And we can use that to redirect us home!
+        this.props.history.push('/')
       })
   }
 

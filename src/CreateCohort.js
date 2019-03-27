@@ -14,8 +14,11 @@ class CreateCohort extends Component {
         cohort: form.formData
       })
       .then(response => {
-        // Eventually redirect to the list page for cohorts
-        console.log(response)
+        // Because we are a routed component
+        // we have this.props.history
+        //
+        // And we can use that to redirect us home!
+        this.props.history.push('/')
       })
   }
 
