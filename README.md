@@ -12,11 +12,11 @@
 
 # - x Add student count to Cohort Details
 
-# - Add list of students to Cohort Details
-
-# - Search Cohorts
+# - x Add list of students to Cohort Details
 
 # - Edit Cohort
+
+# - Search Cohorts
 
 # - Create Students
 

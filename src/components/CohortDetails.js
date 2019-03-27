@@ -3,7 +3,9 @@ import axios from 'axios'
 
 class CohortDetails extends Component {
   state = {
-    cohort: {}
+    cohort: {
+      students: []
+    }
   }
 
   componentDidMount() {
@@ -28,13 +30,30 @@ class CohortDetails extends Component {
       })
   }
 
+  renderStudents = () => {
+    if (this.state.cohort.students.length === 0) {
+      return <></>
+    }
+
+    return (
+      <ul className="list-group mb-3">
+        <li className="list-group-item active">Students:</li>
+        {this.state.cohort.students.map(student => (
+          <li key={student.id} className="list-group-item">
+            {student.name}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
   render() {
     return (
       <>
-        <ul className="list-group">
+        <ul className="list-group mb-3">
           <li className="list-group-item d-flex justify-content-between align-items-center active">
             {this.state.cohort.name}
-            <span class="badge badge-warning badge-pill">
+            <span className="badge badge-warning badge-pill">
               {this.state.cohort.student_count} Students
             </span>
           </li>
@@ -43,7 +62,8 @@ class CohortDetails extends Component {
           </li>
           <li className="list-group-item">End: {this.state.cohort.end_date}</li>
         </ul>
-        <button className="btn btn-danger" onClick={this.deleteCohort}>
+        {this.renderStudents()}
+        <button className="btn btn-danger mb-3" onClick={this.deleteCohort}>
           Delete
         </button>
       </>
