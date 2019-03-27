@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class CohortDetails extends Component {
   state = {
@@ -63,9 +64,17 @@ class CohortDetails extends Component {
           <li className="list-group-item">End: {this.state.cohort.end_date}</li>
         </ul>
         {this.renderStudents()}
-        <button className="btn btn-danger mb-3" onClick={this.deleteCohort}>
-          Delete
-        </button>
+        <div className="mb-3">
+          <Link
+            to={`/cohorts/edit/${this.state.cohort.id}`}
+            className="btn btn-primary mr-2"
+          >
+            Edit
+          </Link>
+          <button className="btn btn-danger" onClick={this.deleteCohort}>
+            Delete
+          </button>
+        </div>
       </>
     )
   }
