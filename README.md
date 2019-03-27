@@ -14,9 +14,9 @@
 
 # - x Add list of students to Cohort Details
 
-# - Edit Cohort
+# - x Edit Cohort
 
-# - Search Cohorts
+# - x Search Cohorts
 
 # - Create Students
 
@@ -25,3 +25,7 @@
 # - Update a student
 
 # - Delete a student
+
+# - Fancy: Add a navbar for navigation and move create + search to the navigation bar
+
+# - Fancy: If there are no matches for a cohort search show a message instead of a blank page...
