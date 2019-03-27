@@ -9,7 +9,7 @@ class ListCohorts extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/cohorts').then(response => {
+    axios.get('http://localhost:3000/cohorts.json').then(response => {
       console.log(response.data)
       this.setState({ cohorts: response.data })
     })

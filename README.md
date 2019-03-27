@@ -8,7 +8,9 @@
 
 # - x Create a Cohort
 
-# - Delete a Cohort
+# - x Delete a Cohort
+
+# - x Add student count to Cohort Details
 
 # - Add list of students to Cohort Details
 

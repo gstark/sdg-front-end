@@ -8,12 +8,11 @@ class CohortDetails extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:3000/cohorts/${this.props.match.params.id}`)
+      .get(`http://localhost:3000/cohorts/${this.props.match.params.id}.json`)
       .then(response => {
         console.log(response.data)
         this.setState({ cohort: response.data })
       })
-    // use this.props.id to FETCH the cohort
   }
 
   deleteCohort = event => {
@@ -33,12 +32,16 @@ class CohortDetails extends Component {
     return (
       <>
         <ul className="list-group">
-          <li className="list-group-item active">{this.state.cohort.name}</li>
+          <li className="list-group-item d-flex justify-content-between align-items-center active">
+            {this.state.cohort.name}
+            <span class="badge badge-warning badge-pill">
+              {this.state.cohort.student_count} Students
+            </span>
+          </li>
           <li className="list-group-item">
             Start: {this.state.cohort.start_date}
           </li>
           <li className="list-group-item">End: {this.state.cohort.end_date}</li>
-          <li className="list-group-item">Number of students: 14</li>
         </ul>
         <button className="btn btn-danger" onClick={this.deleteCohort}>
           Delete
